@@ -1,0 +1,38 @@
+/out/
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.env
+
+### PROJECT ###
+/lib/
+/src/main/resources/application.yml
+/src/main/resources/service-account.json
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Spring Boot LOGs ###
+./*.log
+./*.gz
+app.log
+app.log.*
