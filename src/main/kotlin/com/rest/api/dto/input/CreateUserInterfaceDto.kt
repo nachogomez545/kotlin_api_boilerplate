@@ -14,7 +14,7 @@ data class CreateUserInterfaceDto(
         @NotBlank(message = "user_name cannot be null nor blank")
         val userName: String,
         @NotBlank(message = "password cannot be null nor blank")
-        val password: String,
+        var password: String,
         @Email(message = "value must be a valid email")
         val email: String,
         @NotBlank(message = "first_name cannot be null nor blank")

@@ -21,10 +21,20 @@ import javax.transaction.Transactional
 class UserInterfaceService @Autowired
 constructor(private val userService: UserService,
             private val emailService: EmailService,
-            private val contactService: ContactService) {
+            private val contactService: ContactService): CommonSignUp {
+
+    fun findById(id: Long): UserInterfaceDto {
+
+        val (contact, emails, user) = findUserInternalSchemaById(id)
+
+        return UserInterfaceMarshaller.userInterfaceDto(contact,
+                emails,
+                user
+        )
+    }
 
     @Transactional
-    fun create(createUserInterfaceDto: CreateUserInterfaceDto): UserInterfaceDto {
+    override fun create(createUserInterfaceDto: CreateUserInterfaceDto): UserInterfaceDto {
         val (id) = findEmail(createUserInterfaceDto.email)
 
         if (id > 0) {
@@ -132,16 +142,6 @@ constructor(private val userService: UserService,
                 contactDto,
                 emails,
                 userDto
-        )
-    }
-
-    private fun findById(id: Long): UserInterfaceDto {
-
-        val (contact, emails, user) = findUserInternalSchemaById(id)
-
-        return UserInterfaceMarshaller.userInterfaceDto(contact,
-                emails,
-                user
         )
     }
 }

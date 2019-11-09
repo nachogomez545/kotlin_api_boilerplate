@@ -22,8 +22,8 @@ constructor(private val userRepository: UserRepository) {
         )
     }
 
-    fun findById(id: Long?): UserDto {
-        val userEntity = userRepository.findById(id!!)
+    fun findById(id: Long): UserDto {
+        val userEntity = userRepository.findById(id)
                 .orElseThrow { NotFoundException("User", "id", id) }
 
         return UserMarshaller.fromEntityToDto(userEntity)

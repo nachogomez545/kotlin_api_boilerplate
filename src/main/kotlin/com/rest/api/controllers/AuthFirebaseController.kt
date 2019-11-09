@@ -14,10 +14,10 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping(value = ["\${api.v1.auth.root}"])
-class AuthController @Autowired
+class AuthFirebaseController @Autowired
 constructor(private val firebaseService: AuthFirebaseService){
 
-    @PostMapping("\${api.v1.auth.login}")
+    @PostMapping("\${api.v1.auth.firebase_login}")
     fun loginViaFirebase(@RequestHeader(value = "token") token: String): Single<UserSignedDto> {
         return firebaseService.signIn(token)
                 .subscribeOn(Schedulers.io())
@@ -25,7 +25,7 @@ constructor(private val firebaseService: AuthFirebaseService){
                 .doOnError{throwable -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(UserSignedDto(throwable.localizedMessage)) }
     }
 
-    @PostMapping("\${api.v1.auth.signup}")
+    @PostMapping("\${api.v1.auth.firebase_signup}")
     fun signUpViaFirebase(@RequestBody @Valid userUsingTokenDto: CreateUserUsingTokenDto): ResponseEntity<UserSignedDto> {
         val response: UserSignedDto
         var posibleError = ""

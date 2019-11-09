@@ -5,8 +5,8 @@
 
 ### PROJECT ###
 /lib/
-/src/main/resources/application.yml
-/src/main/resources/service-account.json
+### /src/main/resources/application.yml
+### /src/main/resources/service-account.json
 
 ### STS ###
 .apt_generated
