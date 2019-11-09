@@ -1,0 +1,94 @@
+server:
+  port: 8080
+
+spring:
+
+  jackson:
+    mapper:
+      DEFAULT_VIEW_INCLUSION: true
+    serialization:
+      indent_output: true
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      ACCEPT_SINGLE_VALUE_AS_ARRAY: true
+    default-property-inclusion: non_empty
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/rest_api
+    username: root
+    password: unodostres
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true
+
+  jpa:
+    openInView: false
+    show_sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  data:
+    jpa:
+      repositories.enabled: true
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    com.example: DEBUG
+  file: app.log
+
+api:
+  v1:
+    auth:
+      root: /v1/auth
+      jwt_login: /oauth/login
+      jwt_signup: /oauth/signup
+      firebase_login: /fb/login
+      firebase_signup: /fb/signup
+    users:
+      root: /v1/users
+      create: /
+      find: /{id}
+      update: /{id}
+      delete: /{id}
+    categories:
+      root: /v1/categories
+      main: /
+      by_id: /{id}
+      by_name: /name/{name}
+      by_code: /code/{code}
+      by_page: /page/{page}
+      not_availables: /not-availables/page/{page}
+    products:
+      root: /v1/products
+      main: /
+      by_id: /{id}
+      by_name: /name/{name}
+      by_code: /code/{code}
+      by_page: /page/{page}
+      not_availables: /not-availables/page/{page}
+      by_category: /category/{category}/page/{page}
+      by_supplier: /supplier/{supplier}/page/{page}
+      by_category_supplier: /category/{category}/supplier/{supplier}/page/{page}
+    suppliers:
+      root: /v1/suppliers
+      main: /
+      by_id: /{id}
+      by_contact_name: /contact-name/{name}
+      by_company_name: /company/{company}
+      by_city: /city/{city}
+      by_country: /country/{country}
+      by_page: /page/{page}
+      not_availables: /not-availables/page/{page}
+
+security:
+  jwt:
+    token:
+      expire_length: 3600000
+      secret_key: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJGQ0lsS0s0V2lmQ3ZBUUlzOWdzdGx4VDJKQVYxM3NYNzFEY0hfZUpMZ0FsRHRON3V6eG9pNmdTZXdXdG5kdlZmRmJnN3kyRnBSa1YyOXFLOXdodVNSUSIsIm5hbWUiOiJTdG9ja2VyIEFwaSIsImlhdCI6MTUxNjIzOTAyMn0.SVi_oO8Y_NAUVbPPm8x0mJIbw7oJi2qbP3LrCFpBGRXKbYTyIojzH7TW71_cW0c5Yhugtu5fEpLJovDkJR1amQ
